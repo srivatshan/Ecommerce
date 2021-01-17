@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductsApi</name>
+    </assembly>
+    <members>
+        <member name="M:ProductsApi.Controllers.ProductsController.GetAllProducts">
+            <summary>
+            Get All product Details.
+            </summary>
+        </member>
+        <member name="M:ProductsApi.Controllers.ProductsController.GetProduct(System.Int32)">
+            <summary>
+            Get product Details based on ID.
+            </summary>
+            <param name="id"></param>
+        </member>
+    </members>
+</doc>
