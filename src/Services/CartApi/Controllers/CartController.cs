@@ -11,5 +11,11 @@ namespace CartApi.Controllers
     [ApiController]
     public class CartController : ControllerBase
     {
+        [Route("Test")]
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return Ok("Hai");
+        }
     }
 }

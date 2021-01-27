@@ -14,7 +14,15 @@ namespace UserAccountApi.Data.Repository
         {
             _db = userAccountContext;
         }
-        public UserDetail GetUserDetails(string UserName, string Password)
+
+        public async Task<UserDetail> CreateNewUser(UserDetail userDetail)
+        {
+            _db.UserDetails.Add(userDetail);
+            _db.SaveChanges();
+            return userDetail;
+        }
+
+        public async Task<UserDetail> GetUserDetails(string UserName, string Password)
         {
             var response = _db.UserDetails.FirstOrDefault(x => x.Email == UserName && x.Password == Password);
             return response;

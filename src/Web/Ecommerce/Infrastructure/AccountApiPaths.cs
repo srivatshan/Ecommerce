@@ -11,5 +11,9 @@ namespace Ecommerce.Infrastructure
         {
             return $"{baseUri}GetUserDetails/{UserName}/{Password}";
         }
+        public static string CreateUser(string baseUri)
+        {
+            return $"{baseUri}CreatUser/";
+        }
     }
 }

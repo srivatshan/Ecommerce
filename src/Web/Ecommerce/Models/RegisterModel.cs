@@ -9,7 +9,7 @@ namespace Ecommerce.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "Firstname")]
+        [Display(Name = "FirstName")]
         public string FirstName { get; set; }
 
         [Required]

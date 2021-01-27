@@ -23,11 +23,22 @@ namespace Ecommerce.Services
             _logger = logger;
             _remoteServiceBaseUrl = $"{_settings.Value.AccountUrl}api/Account/";
         }
+
+        public async Task<RegisterModel> CreateNewUser(RegisterModel registerModel)
+        {
+            var path = AccountApiPaths.CreateUser(_remoteServiceBaseUrl);
+            var response = await _apiClient.PostAsync(path, registerModel);
+            if(response.IsSuccessStatusCode)
+            {
+               return JsonConvert.DeserializeObject<RegisterModel>(response.Content.ReadAsStringAsync().Result.ToString());
+            }
+            return null;
+        }
+
         public async Task<string> GetUserDetails(string UserName, string Password)
         {
             var AccountDetail = AccountApiPaths.GetUserDetails(_remoteServiceBaseUrl, UserName, Password);
             return await _apiClient.GetStringAsync(AccountDetail);
-          //  return JsonConvert.DeserializeObject<RegisterModel>(response.ToString());
         }
 
 

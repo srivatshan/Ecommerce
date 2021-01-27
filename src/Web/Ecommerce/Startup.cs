@@ -6,6 +6,7 @@ using Ecommerce.Infrastructure;
 using Ecommerce.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,34 +28,49 @@ namespace Ecommerce
         {
           //  en you can update your authentication configuration to look like the following:
 
-services.AddAuthentication(options =>
-{
-    options.DefaultScheme = "cookie";
-    options.DefaultChallengeScheme = "oidc";
-})
-    .AddCookie("cookie")
-    .AddOpenIdConnect("oidc", options =>
-    {
-        options.Authority = "https://localhost:44366";
-        options.ClientId = "oidcClient";
-        options.ClientSecret = "SuperSecretPassword";
 
-        options.ResponseType = "code";
-        options.UsePkce = true;
-        options.ResponseMode = "query";
+//services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = "cookie";
+//    options.DefaultChallengeScheme = "oidc";
+//})
+//    .AddCookie("cookie")
+//    .AddOpenIdConnect("oidc", options =>
+//    {
+//        options.Authority = "https://localhost:44366";
+//        options.ClientId = "oidcClient";
+//        options.ClientSecret = "SuperSecretPassword";
 
-        // options.CallbackPath = "/signin-oidc"; // default redirect URI
+//        options.ResponseType = "code";
+//        options.UsePkce = true;
+//        options.ResponseMode = "query";
 
-        // options.Scope.Add("oidc"); // default scope
-        // options.Scope.Add("profile"); // default scope
-        options.Scope.Add("api1.read");
-        options.SaveTokens = true;
-    });
+//        // options.CallbackPath = "/signin-oidc"; // default redirect URI
+
+//        // options.Scope.Add("oidc"); // default scope
+//        // options.Scope.Add("profile"); // default scope
+//        options.Scope.Add("api1.read");
+//        options.SaveTokens = true;
+//    });
+            //For Cookie based authendication
+            services.AddAuthentication("CookieAuthentication")
+                 .AddCookie("CookieAuthentication", config =>
+                 {
+                     config.Cookie.Name = "UserLoginCookie";
+                     config.LoginPath = "/Account/Index";
+                                    
+                 });
+             
+            //For session Storage
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+        
             services.Configure<AppSettings>(Configuration);
             services.AddControllersWithViews();
             services.AddTransient<IHttpClient, CustomHttpClient>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IAccountService,AccountService>();
+           
             //services.AddAuthentication(options =>
             //{
             //    options.DefaultScheme = "cookie";
@@ -75,19 +91,21 @@ services.AddAuthentication(options =>
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //For session Storage
+            app.UseSession();
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Dashboard}/{action=Index}/{id?}");
-            //});
+            // app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Account}/{action=Index}/{id?}");
+            });
         }
     }
 }

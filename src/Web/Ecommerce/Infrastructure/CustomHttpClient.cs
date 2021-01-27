@@ -1,5 +1,6 @@
 ﻿using IdentityModel.Client;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,14 @@ namespace Ecommerce.Infrastructure
     {
         private HttpClient _client;
         private ILogger<CustomHttpClient> _logger;
+     
+        private readonly IOptionsSnapshot<AppSettings> _settings;
 
-        public  CustomHttpClient(ILogger<CustomHttpClient> logger)
+        public  CustomHttpClient(IOptionsSnapshot<AppSettings> settings,ILogger<CustomHttpClient> logger)
         {
+
             _client = new HttpClient();
-            var disco =  _client.GetDiscoveryDocumentAsync("https://localhost:44366").Result;
+            var disco =  _client.GetDiscoveryDocumentAsync($"{settings.Value.IdentityServer}").Result;
             var tokenResponse =  _client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 GrantType = "client_credentials",
@@ -28,6 +32,7 @@ namespace Ecommerce.Infrastructure
                 Address = disco.TokenEndpoint,
             }).Result;
             _client.SetBearerToken(tokenResponse.AccessToken);
+            
             _logger = logger;
         }
 

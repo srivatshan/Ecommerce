@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartApi", "src\Services\Car
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "src\Services\IdentityServer\IdentityServer.csproj", "{CF9DDACB-3837-4673-9ED3-120F98481498}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserAccountApi", "src\Services\UserAccountApi\UserAccountApi.csproj", "{2A05308B-3FCA-491F-8581-B5B9DD430B2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserAccountApi", "src\Services\UserAccountApi\UserAccountApi.csproj", "{2A05308B-3FCA-491F-8581-B5B9DD430B2C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5D4F317E-11BF-4488-ACE6-792687F8B16B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2A05308B-3FCA-491F-8581-B5B9DD430B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A05308B-3FCA-491F-8581-B5B9DD430B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A05308B-3FCA-491F-8581-B5B9DD430B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D4F317E-11BF-4488-ACE6-792687F8B16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D4F317E-11BF-4488-ACE6-792687F8B16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4F317E-11BF-4488-ACE6-792687F8B16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D4F317E-11BF-4488-ACE6-792687F8B16B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

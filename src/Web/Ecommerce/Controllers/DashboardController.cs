@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers
 {
- 
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IProductService _productService;

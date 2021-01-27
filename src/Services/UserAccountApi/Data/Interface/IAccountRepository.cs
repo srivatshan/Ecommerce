@@ -8,6 +8,7 @@ namespace UserAccountApi.Data.Interface
 {
    public interface IAccountRepository
     {
-        UserDetail GetUserDetails(string UserName, string Password);
+        Task<UserDetail> GetUserDetails(string UserName, string Password);
+        Task<UserDetail> CreateNewUser(UserDetail userDetail);
     }
 }

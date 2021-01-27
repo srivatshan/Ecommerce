@@ -10,7 +10,7 @@ namespace Ecommerce
 
         public string ProductsUrl { get; set; }
         public string AccountUrl { get; set; }
-
+        public string IdentityServer { get; set; }
         public Logging Logging { get; set; }
     }
 
